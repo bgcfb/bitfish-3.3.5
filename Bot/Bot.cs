@@ -104,7 +104,7 @@ namespace Bitfish
         /// </summary>
         internal void Stop()
         {
-            Console.WriteLine("Stopping the bot ...");
+            Console.WriteLine("停止钓鱼 ...");
             worker.CancelAsync();
             clock.CancelAsync();
         }
@@ -114,7 +114,7 @@ namespace Bitfish
         /// </summary>
         private void BeginFishing()
         {
-            mem.LuaDoString("CastSpellByName('Fishing')");
+            mem.LuaDoString("CastSpellByName('钓鱼')");
             Thread.Sleep(800);
         }
 
@@ -138,7 +138,7 @@ namespace Bitfish
             if(inWintergrasp)
             {
                 wgStartTime = func.GetWGTimer() + session.startTime;
-                Console.WriteLine($"[{session.seconds}] Wintergrasp will start at: [{wgStartTime}]");
+                Console.WriteLine($"[{session.seconds}] 冬拥湖开始时间: [{wgStartTime}]");
             }
 
             // wait a global for fish pole equip
@@ -205,7 +205,7 @@ namespace Bitfish
                 if (bobber == null)
                 {
                     fails++;
-                    Console.WriteLine("No bobber was found!");
+                    Console.WriteLine("没有找到鱼漂!");
                     Thread.Sleep(2000);
                     continue;
                 }
@@ -247,7 +247,7 @@ namespace Bitfish
                         int slots = func.GetFreeInventorySlots();
                         if(slots == 0)
                         {
-                            Console.WriteLine("Inventory has no free slots left, stopping");
+                            Console.WriteLine("背包满了, 停止工作");
                             break;
                         }
                     }
@@ -315,14 +315,14 @@ namespace Bitfish
         /// <param name="e"></param>
         private void Finished(object sender, RunWorkerCompletedEventArgs e)
         {
-            Console.WriteLine("Bot has been stopped.");
+            Console.WriteLine("钓鱼已停止.");
             BitfishForm.instance.UpdateStatus(false);
 
             if (clock.IsBusy)
                 clock.CancelAsync();
 
             if (failed)
-                Console.WriteLine("The bot has been stopped due to too many failed fishing attempts!");
+                Console.WriteLine("尝试次数太多,停止工作!");
 
             bool dead = func.IsPlayerDead();
 
@@ -336,23 +336,23 @@ namespace Bitfish
                 {
                     // yea, let's wait till we die
                     // warning: this could potentially get stuck in a loop
-                    Console.WriteLine("We are in combat! Waiting to die ...");
+                    Console.WriteLine("我们被攻击了! 等待死亡吧 ...");
                     while (!func.IsPlayerDead())
                         Thread.Sleep(1000);
 
-                    Console.WriteLine("Player has died.");
+                    Console.WriteLine("玩家已死亡.");
                     func.ReleaseAndLogout(random.Next(1300) + 500);
                 }
             }
 
             if (config.HearthstoneWhenDone)
             {
-                Console.WriteLine("Casting Hearthstone");
-                mem.LuaDoString("UseItemByName(\"Hearthstone\")");
+                Console.WriteLine("使用炉石中");
+                mem.LuaDoString("UseItemByName(\"炉石\")");
                 if(config.LogoutWhenDone)
                 {
                     // wait 20s for hearthstone and loading
-                    Console.WriteLine("Waiting 20s for casting and loading screen until logout ...");
+                    Console.WriteLine("等待20秒以退出游戏 ...");
                     Thread.Sleep(20000);
                     mem.LuaDoString("Logout()");
                 }

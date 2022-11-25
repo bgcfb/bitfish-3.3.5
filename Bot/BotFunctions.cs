@@ -90,7 +90,7 @@ namespace Bitfish
                     {
                         playerTracker.TryGetValue(key, out int lastSeen);
                         seen = true;
-                        Console.WriteLine($"[{session.seconds}] Nearby player: {key:X} {lastSeen}");
+                        Console.WriteLine($"[{session.seconds}] 附近玩家: {key:X} {lastSeen}");
                         int time = session.seconds - lastSeen;
                         if (time > maxTime) return true;
                     }
@@ -197,7 +197,7 @@ namespace Bitfish
         {
             mem.LuaDoString("zone = GetZoneText()");
             string currentZone = mem.LuaGetLocalizedText("zone");
-            Console.WriteLine($"We are in: [{currentZone}]");
+            Console.WriteLine($"我们在: [{currentZone}]");
             if (currentZone == "Wintergrasp")
                 return true;
             else return false;

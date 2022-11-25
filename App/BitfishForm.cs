@@ -73,13 +73,13 @@ namespace Bitfish
                 WowIDList.SelectedIndex = 0;
                 WowIDList.Visible = true;
                 ConfirmProcessButton.Visible = true;
-                StatusLabel.Text = "Please choose a specific process >";
+                StatusLabel.Text = "请选择一个进程 >";
                 StatusLabel.ForeColor = Color.Orange;
             }
             else if (wowList.Count <= 0)
             {
                 Console.WriteLine("No processes was found.");
-                StatusLabel.Text = "No process was found";
+                StatusLabel.Text = "找不到wow.exe进程";
                 StatusLabel.ForeColor = Color.Red;
                 RetryButton.Visible = true;
             }
@@ -104,7 +104,7 @@ namespace Bitfish
             else
             {
                 Console.WriteLine("Initialization failed!");
-                StatusLabel.Text = "Please enter world and hit retry";
+                StatusLabel.Text = "请进入游戏后再试";
                 StatusLabel.ForeColor = Color.Red;
                 RetryButton.Visible = true;
                 StartButton.Enabled = false;
@@ -140,12 +140,12 @@ namespace Bitfish
 
         private void SetReady()
         {
-            StatusLabel.Text = "Ready";
+            StatusLabel.Text = "准备就绪";
             StatusLabel.ForeColor = Color.Green;
-            Console.WriteLine("Bot is ready");
+            Console.WriteLine("准备就绪");
             WowIDList.Visible = false;
             ConfirmProcessButton.Visible = false;
-            ProcIdLabel.Text = $"Process ID: {memoryReader.GetProcessId()}";
+            ProcIdLabel.Text = $"进程 ID: {memoryReader.GetProcessId()}";
             ProcIdLabel.Visible = true;
             RetryButton.Visible = false;
             StartButton.Enabled = true;
@@ -175,7 +175,7 @@ namespace Bitfish
         {
             if (memoryError)
             {
-                StatusLabel.Text = "Please enter world before starting";
+                StatusLabel.Text = "开始前请先进入游戏";
                 StatusLabel.ForeColor = Color.Red;
                 StopButton.Enabled = false;
                 return;
@@ -183,14 +183,14 @@ namespace Bitfish
 
             if (running)
             {
-                StatusLabel.Text = "Fishing ...";
+                StatusLabel.Text = "钓鱼中 ...";
                 StatusLabel.ForeColor = Color.Green;
                 StartButton.Enabled = false;
                 StopButton.Enabled = true;
             }
             else
             {
-                StatusLabel.Text = "Stopped.";
+                StatusLabel.Text = "已停止.";
                 StatusLabel.ForeColor = Color.Green;
                 StartButton.Enabled = true;
                 StopButton.Enabled = false;
@@ -203,7 +203,7 @@ namespace Bitfish
         /// <param name="v"></param>
         internal void UpdateFishCaught(int fishCaught)
         {
-            FishCaughtLabel.Text = $"Fish Caught: {fishCaught}";
+            FishCaughtLabel.Text = $"上钩数: {fishCaught}";
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Bitfish
             // transform seconds to MM:SS
             int sec = seconds % 60;
             int min = seconds / 60;
-            TimerLabel.Text = $"Time: {min}m {sec}s";
+            TimerLabel.Text = $"用时: {min}分 {sec}秒";
         }
 
         internal string GetFishingPole()
@@ -334,5 +334,25 @@ namespace Bitfish
         }
 
         #endregion
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OpenLogButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CurrentSessionBox_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FishCaughtLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

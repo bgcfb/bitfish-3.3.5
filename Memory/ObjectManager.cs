@@ -79,12 +79,15 @@ namespace Bitfish
                         // Read the object name
                         uint pName = blackMagic.ReadUInt(curr + 0x1A4);
                         uint pStr = blackMagic.ReadUInt(pName + 0x90);
-                        string objectName = blackMagic.ReadASCIIString(pStr, 14);
+                        string objectName = blackMagic.ReadASCIIString(pStr, 4);
+                        Console.WriteLine(objectName);
+                        //string ypname = "楸兼";
 
                         // Console.WriteLine($"i={i} [{curr.ToString("X")}] name={objectName}");
 
-                        if (objectName == "Fishing Bobber")
-                        {
+                        //if (ypname.IndexOf(objectName, StringComparison.OrdinalIgnoreCase) >= 0)
+                        if (objectName == "楸兼")
+                            {
                             ulong guid = blackMagic.ReadUInt64(curr + Offsets.ObjManager.GUID);
                             if (!blacklist.Contains(guid))
                             {
